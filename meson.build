@@ -5,7 +5,7 @@ project(
 )
 
 python = import('python').find_installation()
-python_dependency = python.dependency()
+python_dep = python.dependency()
 
 compiler = meson.get_compiler('cpp')
 
@@ -30,9 +30,18 @@ pyodbc_inc = include_directories(
   is_system: true
 )
 
-# Build the npyodbc module
+add_project_arguments(
+  [
+    '-DPYODBC_VERSION=' + meson.project_version(),
+    '-Wno-write-strings',
+    '-Wno-deprecated-declarations',
+  ],
+  language: 'cpp'
+)
+
+# Build the pyodbc module
 python.extension_module(
-  'npyodbc',
+  'pyodbc',
   pyodbc_sources,
   dependencies : [
     python_dep,

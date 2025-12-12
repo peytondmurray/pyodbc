@@ -6,6 +6,8 @@ __pycache__/
 *.py[cod]
 setup.cfg
 
+.cache/
+
 # C extensions
 *.so
 *.dll
